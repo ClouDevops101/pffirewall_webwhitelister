@@ -46,7 +46,7 @@ The output should be as follow :
 185.63.144.1  Added
 
 ```
-
+ È
 Now Add a rule to Pf firewall table with a multiple  IP  :
 ```bash
 sudo ./pffirewall_webwhiteli`ster.py "linkedIn" 185.63.144.1  185.63.143.1 185.63.142.1
