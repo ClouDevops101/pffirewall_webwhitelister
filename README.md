@@ -49,7 +49,7 @@ The output should be as follow :
 
 Now Add a rule to Pf firewall table with a multiple  IP  :
 ```bash
-sudo ./pffirewall_webwhitelister.py "linkedIn" 185.63.144.1  185.63.143.1 185.63.142.1
+sudo ./pffirewall_webwhiteli`ster.py "linkedIn" 185.63.144.1  185.63.143.1 185.63.142.1
 ```
 The output should be as follow : 
 ```bash
