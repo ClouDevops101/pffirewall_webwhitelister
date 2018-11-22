@@ -3,6 +3,7 @@
 import sys
 import os
 import socket
+import re
 
 def lookup_ip(addr):
    try:
@@ -13,7 +14,8 @@ def lookup_ip(addr):
 
 def lookup_host(host):
    try:
-       return socket.gethostbyname(host)
+       #return socket.gethostbyname(host)
+       return socket.gethostbyname_ex(host)[2:][0]
    except socket.gaierror:
        return None
 
@@ -30,10 +32,20 @@ def AddIP_toFile(comment,list_ip,file):
 def main():
   fic="/etc/pf-files/www-trusted-server"
   comment = sys.argv[1]
-  if not sys.argv[2]:
-      addressToAdd = lookup_host(comment)
-  else:
+
+  #print len(sys.argv)
+
+  addressToAdd=[]
+  if len(sys.argv) == 2:
+      r1 = re.findall(r"^[a-z][a-z0-9+\-.]*://([a-z0-9\-._~%!$&'()*+,;=]+@)?([a-z0-9\-._~%]+|\[[a-z0-9\-._~%!$&'()*+,;=:]+\])",comment)
+      domain = r1[0][1]
+      addressToAdd = (lookup_host(domain))
+      print "[" + domain + "]"
+      comment = domain
+  elif len(sys.argv) > 2:
       addressToAdd = sys.argv[2:]
+  else:
+      sys.exit(0)
   print addressToAdd
   list_ip = []
 
