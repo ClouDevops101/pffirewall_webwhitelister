@@ -1,0 +1,11 @@
+#! /bin/bash
+if echo $1 | grep -q "http"
+  then
+    domain=$(echo $1 | awk -F[/:] '{print $4}')
+    IP=$(dig +short $domain | ipv4 | tr '\n' ' ')
+  else
+    IP=$(dig +short $1 | ipv4 | tr '\n' ' ')
+fi
+echo "$1"
+echo $IP
+pffirewall_webwhitelister.py "$1" $IP
